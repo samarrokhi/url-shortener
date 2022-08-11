@@ -1,0 +1,37 @@
+version: '3.1'
+
+services:
+  app:
+    container_name: url-shortener
+    restart: always
+    build: .
+    environment:
+      MONGO_DB_CONN_STRING: mongodb://default:default@mongo:27017
+      MONGO_DB_NAME: url-shortener
+      MONGO_DB_URL_COLLECTION_NAME: urls
+      MONGO_DB_STATS_COLLECTION_NAME: stats
+      SERVICE_BASE_URL: http://localhost:3000
+      SERVER_PORT: 3000
+    ports:
+      - 3000:3000
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: default
+      MONGO_INITDB_ROOT_PASSWORD: default
+    ports:
+      - "27017:27017"
+
+  mongo-express:
+    image: mongo-express
+    container_name: express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: default
+      ME_CONFIG_MONGODB_ADMINPASSWORD: default
+      ME_CONFIG_MONGODB_URL: mongodb://default:default@mongo:27017/
