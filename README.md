@@ -1,4 +1,4 @@
-# Shop Apoteke Challenge
+# Url Shortener
 
 ## Service Specification
 - [x] 1. Make a small REST API that receives in a URL with Python or Typescript
